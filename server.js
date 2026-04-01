@@ -3,10 +3,18 @@ import { DatabaseMemory } from './database-memory.js';
 
 const server = fastify();
 
+const database = new DatabaseMemory();
+
 // Rotas da aplicação
 
 server.post('/videos', () => {
-    return 'Hello World!'
+    database.create({
+        title: 'Video 1',
+        description: 'Este é o primeiro vídeo',
+        duration: 120
+    });
+
+    console.log(database.list());
 });
 
 server.get('/videos', () => {
